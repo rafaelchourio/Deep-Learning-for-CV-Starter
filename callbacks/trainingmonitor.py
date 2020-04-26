@@ -18,18 +18,18 @@ class TrainingMonitor(BaseLogger):
     # initialize the history dictionary
     self.H = {}
     
-      # if the JSON history path exists, load the training history
-      if self.jsonPath is not None:
-        if os.path.exists(self.jsonPath):
-          self.H = json.loads(open(self.jsonPath).read())
-          
-          # check to see if a starting epoch was supplied
-          if self.startAt > 0:
-            # loop over the entries in the history log and
-            # trim any entries that are past the starting
-            # epoch
-            for k in self.H.keys():
-              self.H[k] = self.H[k][:self.startAt]
+    # if the JSON history path exists, load the training history
+    if self.jsonPath is not None:
+      if os.path.exists(self.jsonPath):
+        self.H = json.loads(open(self.jsonPath).read())
+
+        # check to see if a starting epoch was supplied
+        if self.startAt > 0:
+          # loop over the entries in the history log and
+          # trim any entries that are past the starting
+          # epoch
+          for k in self.H.keys():
+            self.H[k] = self.H[k][:self.startAt]
               
   def on_epoch_end(self, epoch, logs={}):
     # loop over the logs and update the loss, accuracy, etc.
